@@ -1,5 +1,7 @@
 using Entity;
+using Contracts;
 using Microsoft.EntityFrameworkCore;
+using Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
@@ -12,6 +14,8 @@ builder.Services.AddDbContext<EmployeeDbContext>(Options =>
 });
 
 builder.Services.AddScoped(typeof(DbContext), typeof(EmployeeDbContext));
+builder.Services.AddScoped(typeof(IEmployee), typeof(EmployeeRepository));
+builder.Services.AddScoped(typeof(IDepartment), typeof(DepartmentRepository));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
